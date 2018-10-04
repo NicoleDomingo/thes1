@@ -49,7 +49,7 @@ def save(request):
 
 		patient_var = Patient(firstName = firstName, middleName = middleName, lastName = lastName, birthDate = birthDate, religion = religion, minTemp = minTemp, maxTemp = maxTemp, minHeartRate = minHeartRate, maxHeartRate = maxHeartRate, contactNum = contactNum, bedNumber = bedNumber, status = 1)
 		patient_var.save()
-	return render(request, 'home.html')
+	return render(request, 'Patient/home.html')
 def addDoctor(request):
 
 	if request.method == "POST":
@@ -64,7 +64,7 @@ def addDoctor(request):
 		doctor_var = Doctor(firstName = firstName, middleName = middleName, lastName = lastName, contactNum = contactNum, username = username, password = password)
 		doctor_var.save()
 
-	return render(request, 'addDoctor.html')
+	return render(request, 'Doctor/addDoctor.html')
 
 def listOfPatients(request):
 
@@ -72,7 +72,7 @@ def listOfPatients(request):
 	print(list_of_patient)
 	context = {'list_of_patient':list_of_patient}
 
-	return render(request,'listOfPatients.html',context)
+	return render(request,'Patient/listOfPatients.html',context)
 
 def viewProfile(request, patient_id):
 	print(patient_id)
@@ -85,7 +85,7 @@ def viewProfile(request, patient_id):
 		print(idStatus)
 		patient_profile.update(status=idStatus)
 #otherwaytoupdate		Patient.objects.filter(idPatient=patient_id).update(status=idStatus)
-	return render(request, 'viewProfile.html',context)
+	return render(request, 'Patient/viewProfile.html',context)
 
 
 def listOfDoctors(request):
@@ -94,7 +94,7 @@ def listOfDoctors(request):
 	print(list_of_doctors)
 	context = {'list_of_doctors':list_of_doctors}
 
-	return render(request,'listOfDoctors.html',context)
+	return render(request,'Doctor/listOfDoctors.html',context)
 
 def viewDrProfile(request, doctor_id):
 	print(doctor_id)
@@ -107,7 +107,7 @@ def viewDrProfile(request, doctor_id):
 		print(idStatus)
 		patient_profile.update(status=idStatus)
 #otherwaytoupdate		Patient.objects.filter(idPatient=patient_id).update(status=idStatus)
-	return render(request, 'viewDrProfile.html',context)
+	return render(request, 'Doctor/viewDrProfile.html',context)
 
 def reportListOfPatients(request):
 
@@ -115,7 +115,7 @@ def reportListOfPatients(request):
 	print(list_of_patient)
 	context = {'list_of_patient':list_of_patient}
 
-	return render(request,'reportListOfPatients.html',context)
+	return render(request,'Patient/reportListOfPatients.html',context)
 
 def heartRateReport(request,patient_id):
 
@@ -134,4 +134,4 @@ def heartRateReport(request,patient_id):
 		patientd_report = HeartRate.objects.filter(idPatient=patient_id,date=nDate,startTime=startTime).values('heartRate','time')
 
 		context={'patientd_report':patientd_report}
-	return render(request,'heartRateReport.html', context)
+	return render(request,'Doctor/heartRateReport.html', context)
