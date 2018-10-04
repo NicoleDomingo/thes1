@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path,  include
 from manageBed import views
 
-#hehe
+#hehew
 urlpatterns = [
 	path('', include('manageBed.urls')),
     path('admin/', admin.site.urls),
