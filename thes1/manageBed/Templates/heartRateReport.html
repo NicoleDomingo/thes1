@@ -1,0 +1,49 @@
+<h1>Heart Rate Report</h1>
+
+<form method = "POST" action="." id="record">
+{% csrf_token %}
+{%if patient_report%}
+	<select name="date">
+	{%for record in patient_report%}
+		<option value="{{record.date}}"> {{record.date}} </option>
+	{%endfor%}
+	</select> <br>
+
+	Start Time: <input type="time" id="startTime" name="startTime"><br>
+	End Time: <input type="time" id="endTime" name="endTime"><br>
+
+	<button type="button" id="searchButton" name="searchButton" onclick="checker()"> Search </button>
+
+</form>
+{%else%}
+	No record available
+
+{%endif%}
+
+
+
+<script type="text/javascript">
+
+	function checker(){
+		if (document.getElementById("startTime").value > document.getElementById("endTime").value){
+				$.ajax({
+			          type: 'POST',
+			          url:'heartRateReport/',
+			          dataType: "json",
+			          traditional: true,
+			          data: {
+			             'csrfmiddlewaretoken': '{{ csrf_token }}',
+			             'heartRate': heartRate,
+			             'time': time,
+			            
+			          },
+			          success: function(){
+			          }
+				})	
+		}
+		else{
+			document.getElementById("record").submit();
+		}
+	}
+	
+</script>
